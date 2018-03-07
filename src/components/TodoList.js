@@ -32,28 +32,30 @@ class TodoList extends Component {
       newTodo: this.state.newTodo
     });
   };
-
+  handleClick = i => {
+    let changedTodo = this.state.todos.slice();
+    changedTodo[i].completed = true;
+    this.setState({ todes: changedTodo });
+  };
+  renderTodo(i) {
+    return (
+      <Todo
+        key={"todo" + i}
+        todo={this.state.todos[i]}
+        onClick={this.handleClick.bind(null, i)}
+        button={
+          <button key={"button" + i} onClick={this.removeTodo.bind(null, i)}>
+            X
+          </button>
+        }
+      />
+    );
+  }
   render() {
     return (
       <div id="TodoList">
-        {this.state.todos.map((todo, i) => {
-          return (
-            <div key={i}>
-              <Todo
-                key={"todo" + i}
-                todo={todo}
-                button={
-                  <button
-                    key={"button" + i}
-                    onClick={this.removeTodo.bind(null, i)}
-                  >
-                    X
-                  </button>
-                }
-              />
-            </div>
-          );
-        })}
+        {this.state.todos.map((todo, i) => this.renderTodo(i))}
+
         <form onSubmit={this.addTodo}>
           <input
             type="text"
