@@ -2,31 +2,15 @@ import React, { Component } from "react";
 import "./Todo.css";
 
 class Todo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: this.props.todo.text,
-      completed: false,
-      strikethrough: { textDecoration: "none" }
-    };
-  }
-  toggleDoneness = () => {
-    this.setState({ completed: !this.state.completed });
-    this.updateStyling();
-  };
-  updateStyling = () => {
-    if (this.state.completed) {
-      this.setState({ strikethrough: { textDecoration: "line-through" } });
-    } else {
-      this.setState({ strikethrough: { textDecoration: "none" } });
-    }
-  };
-
   render() {
+    const styles = this.props.todo.completed
+      ? { textDecoration: "line-through" }
+      : { textDecoration: "none" };
+
     return (
       <div className="todo-wrapper">
         {this.props.button}
-        <p style={this.state.strikethrough} onClick={this.toggleDoneness}>
+        <p style={styles} onClick={() => this.props.onClick()}>
           {this.props.todo.text}
         </p>
       </div>

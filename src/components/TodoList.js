@@ -34,8 +34,9 @@ class TodoList extends Component {
   };
   handleClick = i => {
     let changedTodo = this.state.todos.slice();
-    changedTodo[i].completed = true;
-    this.setState({ todes: changedTodo });
+    changedTodo[i].completed = !changedTodo[i].completed;
+    this.setState({ todos: changedTodo });
+    window.localStorage.setItem("todos", JSON.stringify(changedTodo));
   };
   renderTodo(i) {
     return (
