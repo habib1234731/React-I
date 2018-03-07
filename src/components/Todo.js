@@ -7,7 +7,7 @@ class Todo extends Component {
 
     this.state = {
       text: this.props.todo.text,
-      completed: this.props.completed
+      completed: false
     };
   }
   toggleDoneness = () => {
