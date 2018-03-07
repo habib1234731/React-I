@@ -7,21 +7,19 @@ class Todo extends Component {
 
     this.state = {
       text: this.props.todo.text,
-      completed: false
+      completed: this.props.completed,
+      strikethrough: { textDecoration: "none" }
     };
   }
   toggleDoneness = () => {
     this.setState({ completed: !this.state.completed });
   };
-  render() {
-    const styles = this.state.completed
-      ? {
-          textDecoration: "line-through"
-        }
-      : {
-          textDecoration: "none"
-        };
 
+  render() {
+    let styles = { textDecoration: "none" };
+    if (this.state.completed) {
+      styles = { textDecoration: "strikethrough" };
+    }
     return (
       <div className="todo-wrapper">
         {this.props.button}
